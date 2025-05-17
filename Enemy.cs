@@ -19,14 +19,37 @@ public class Enemy
     private float scale;
 
     public Enemy(Animation idleAnim, Animation deathAnim, Vector2 pos, float speed, float scale)
-{
-    idleAnimation = idleAnim;
-    deathAnimation = deathAnim;
-    currentAnimation = idleAnimation;
-    Position = pos;
-    Speed = speed;
-    this.scale = scale;
-}
+    {
+        idleAnimation = idleAnim;
+        deathAnimation = deathAnim;
+        currentAnimation = idleAnimation;
+        Position = pos;
+        Speed = speed;
+        this.scale = scale;
+    }
+
+    public Rectangle GetHitbox()
+    {
+        int fullWidth = (int)(currentAnimation.CurrentFrame.Width * scale);
+        int fullHeight = (int)(currentAnimation.CurrentFrame.Height * scale);
+    
+        // z.B. 60 % Breite, 70 % Höhe
+        int width = (int)(fullWidth * 0.6f);
+        int height = (int)(fullHeight * 0.7f);
+    
+        // zentriert innerhalb des Bildes platzieren
+        int offsetX = (int)((fullWidth - width) / 2f);
+        int offsetY = (int)((fullHeight - height) / 2f);
+    
+        return new Rectangle(
+            (int)Position.X + offsetX,
+            (int)Position.Y + offsetY,
+            width,
+            height
+        );
+    }
+
+
 
 
     public void Update(GameTime gameTime)

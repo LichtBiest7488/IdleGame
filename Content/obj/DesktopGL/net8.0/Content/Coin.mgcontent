@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Coin.png</SourceFile>
-  <SourceTime>2025-05-16T23:19:13.7066126+02:00</SourceTime>
-  <DestFile>C:/Users/matth/OneDrive/Documents/IdleGame/Content/bin/DesktopGL/Content/Coin.xnb</DestFile>
-  <DestTime>2025-05-16T23:24:48.8026909+02:00</DestTime>
+  <SourceFile>C:/Users/Licht/Documents/Programming/IdleGame/Content/Coin.png</SourceFile>
+  <SourceTime>2025-05-17T14:29:23.3277198+02:00</SourceTime>
+  <DestFile>C:/Users/Licht/Documents/Programming/IdleGame/Content/bin/DesktopGL/Content/Coin.xnb</DestFile>
+  <DestTime>2025-05-17T14:33:23.3967421+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

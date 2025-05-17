@@ -8,7 +8,9 @@ public class Animation
     private List<Texture2D> frames;
     private float timer;
     private float frameTime;
-    private int currentFrame;
+    public int currentFrame;
+    public Texture2D CurrentFrame => frames[currentFrame];
+
 
     public bool Loop { get; set; } = true;
     public bool Finished => !Loop && currentFrame >= frames.Count - 1;

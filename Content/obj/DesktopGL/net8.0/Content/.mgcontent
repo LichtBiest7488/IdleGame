@@ -4,87 +4,81 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/background1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Coin.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/grass_foreground.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/groundBig.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/ScoreFont.spritefont</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0062.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0063.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0064.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0065.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0066.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0067.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0068.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0069.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0070.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0071.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0072.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0073.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0074.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Combo/sword_combo_0075.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0001.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0002.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0003.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0004.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0005.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0006.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0007.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Idle/sword_Idle_0008.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Jump/sword_jump_0043.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Jump/sword_jump_0044.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Jump/sword_jump_0045.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Jump/sword_jump_0046.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Jump/sword_jump_0047.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_01.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_02.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_03.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_04.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_05.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Idle_Sprite/Orc_idle_06.PNG</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_4.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_0_5.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_4.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_5.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_6.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_1_7.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_4.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_2_5.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_4.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_5.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_4_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_4_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_4_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_4_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_5_0.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_5_1.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_5_2.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_5_3.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0017.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0018.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0019.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0020.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0021.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0022.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0023.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Run/sword_run_0024.png</File>
-    <File>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Stickman.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/background1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Coin.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/grass_foreground.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/groundBig.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/ScoreFont.spritefont</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0062.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0063.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0064.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0065.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0066.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0067.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0068.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0069.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0070.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0071.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0072.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0073.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0074.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Combo/sword_combo_0075.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0001.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0002.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0003.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0004.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0005.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0006.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0007.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Idle/sword_Idle_0008.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Jump/sword_jump_0043.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Jump/sword_jump_0044.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Jump/sword_jump_0045.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Jump/sword_jump_0046.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Jump/sword_jump_0047.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_0_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_1_7.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_2_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_4_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_4_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_4_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_4_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_5_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_5_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_5_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_5_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0017.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0018.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0019.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0020.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0021.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0022.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0023.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0024.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Stickman.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -119,12 +113,6 @@
     <File>Sprites/Jump/sword_jump_0045</File>
     <File>Sprites/Jump/sword_jump_0046</File>
     <File>Sprites/Jump/sword_jump_0047</File>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

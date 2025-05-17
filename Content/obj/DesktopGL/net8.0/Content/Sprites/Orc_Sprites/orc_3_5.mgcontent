@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/matth/OneDrive/Documents/IdleGame/Content/Sprites/Orc_Sprites/orc_3_5.png</SourceFile>
-  <SourceTime>2025-05-17T06:52:36.5006976+02:00</SourceTime>
-  <DestFile>C:/Users/matth/OneDrive/Documents/IdleGame/Content/bin/DesktopGL/Content/Sprites/Orc_Sprites/orc_3_5.xnb</DestFile>
-  <DestTime>2025-05-17T06:53:53.1490831+02:00</DestTime>
+  <SourceFile>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Orc_Sprites/orc_3_5.png</SourceFile>
+  <SourceTime>2025-05-17T14:29:23.3587784+02:00</SourceTime>
+  <DestFile>C:/Users/Licht/Documents/Programming/IdleGame/Content/bin/DesktopGL/Content/Sprites/Orc_Sprites/orc_3_5.xnb</DestFile>
+  <DestTime>2025-05-17T14:33:24.6317512+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-04-05T12:10:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
