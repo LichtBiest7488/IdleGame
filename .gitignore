@@ -1,0 +1,25 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.tmp
+
+# VS Code settings (optional, wenn teamübergreifend identisch -> behalten)
+.vscode/
+
+# MonoGame intermediate + output files
+*.xnb
+*.mgcb
+
+# Backup files
+*.bak
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
