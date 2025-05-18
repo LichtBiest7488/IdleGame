@@ -29,5 +29,31 @@ namespace idleGame
             }
             return frames;
         }
+
+        public static Dictionary<string, Texture2D> LoadArmorItems(ContentManager content, string baseFolder)
+        {
+            Dictionary<string, Texture2D> armorTextures = new();
+
+            for (int category = 0; category <= 7; category++)
+            {
+                for (int variant = 0; variant <= 6; variant++)
+                {
+                    string key = $"armor_{category}_{variant}";
+                    string path = $"{baseFolder}/{key}";
+
+                    try
+                    {
+                        Texture2D texture = content.Load<Texture2D>(path);
+                        armorTextures[key] = texture;
+                    }
+                    catch (ContentLoadException)
+                    {
+                        // Optional: skip missing files silently
+                    }
+                }
+            }
+
+            return armorTextures;
+        }
     }
 }

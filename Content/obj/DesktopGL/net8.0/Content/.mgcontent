@@ -4,10 +4,77 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_0_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_1_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_2_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_3_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_4_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_5_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_6_6.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Armor/armor_7_6.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/background1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/ButtonFont.spritefont</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Coin.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/grass_foreground.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/groundBig.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/amulet_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/boot_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/chest_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/empty_slot.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/gloves_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/helmet_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/inventory.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/pant_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/ring_slot.PNG</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Inventory/weapon_slot.PNG</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/ScoreFont.spritefont</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0062.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Air_Attack/sword_air_attack_0063.png</File>
@@ -78,9 +145,75 @@
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0022.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0023.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0024.png</File>
-    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Stickman.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
@@ -155,6 +288,5 @@
     <File>Sprites/Run/sword_run_0022</File>
     <File>Sprites/Run/sword_run_0023</File>
     <File>Sprites/Run/sword_run_0024</File>
-    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

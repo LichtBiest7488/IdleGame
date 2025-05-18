@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
+using System.Linq.Expressions;
+using idleGame;
 
 
 namespace idleGame;
@@ -83,6 +85,32 @@ public class Game1 : Game
     Animation orcDeathAnimation;
     List<Vector2> orcPositions = new();
 
+    //UI Buttons
+    SpriteFont buttonfont;
+    UIButton shopButton, inventoryButton;
+    bool showShop = false, showInventory = false;
+    Texture2D buttonBackground;
+
+    //Inventory
+    Texture2D inventoryBackground;
+    Vector2 inventoryPosition;
+
+    Texture2D helmetSlot, chestSlot, pantSlot, bootSlot, glovesSlot;
+    Texture2D ringSlot, amuletSlot, weaponSlot;
+
+    Vector2 helmetPos, chestPos, pantsPos, bootsPos, glovesPos;
+    Vector2 ringPos, amuletPos, weaponPos;
+
+    Vector2 basePosition = new Vector2(100, 100); // top-left corner
+
+
+    //Items 
+    Dictionary<string, Texture2D> armorItemTextures;
+    float armorDropChance = 1f; // 50% chance (adjust as needed)
+    List<string> tier0ArmorKeys = new();
+    List<InventoryItem> inventoryItems = new();
+
+
 
 
     public Game1()
@@ -100,7 +128,8 @@ public class Game1 : Game
         graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         graphics.ApplyChanges();
-        
+        this.screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        this.screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 
 
         attackDistance = 20f * scale;
@@ -112,6 +141,14 @@ public class Game1 : Game
         Gold = 0;
         goldPerCoin = 1;
         goldPerEnemy = 5;
+
+
+        //Inventory 
+        
+
+
+
+
         
         base.Initialize();
     }
@@ -121,18 +158,21 @@ public class Game1 : Game
         this.screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         this.screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         spriteBatch = new SpriteBatch(GraphicsDevice);
-        playerTexture = Content.Load<Texture2D>("Stickman");
         
         coinTexture = Content.Load<Texture2D>("Coin");
         coinScale = this.screenHeight * 0.04f / coinTexture.Height; //4% von der bildschirm größe
         scorefont = Content.Load<SpriteFont>("ScoreFont");
+        buttonfont = Content.Load<SpriteFont>("ButtonFont");
 
         //Load Sword-run Sprite
         playerFrames = SpriteLoader.LoadPlayerFrames(Content, "Sprites/Run/sword_run_", 17, 24);
         runAnimation = new Animation(playerFrames);
         //Load Sword-Jump Sprite
         playerFrames = SpriteLoader.LoadPlayerFrames(Content, "Sprites/Jump/sword_jump_", 43, 47);
-        jumpAnimation = new Animation(playerFrames, frameTime: 0.12f); // etwas langsamer
+        jumpAnimation = new Animation(playerFrames, frameTime: 0.12f) // etwas langsamer
+        {
+            Loop = false
+        };
         //Load Sword-Combo Sprite
         playerFrames = SpriteLoader.LoadPlayerFrames(Content, "Sprites/Combo/sword_combo_", 65, 75);
         comboAnimation = new Animation(playerFrames, 0.08f); // TODO evtl. Framezeit anpassen
@@ -148,7 +188,6 @@ public class Game1 : Game
         whitePixel.SetData(new[] { Color.White });
 
         //Boden
-        int screenWidth = GraphicsDevice.Viewport.Width;
         groundTexture = Content.Load<Texture2D>("groundBig");
         groundScale = (screenHeight * 0.15f) / groundTexture.Height;
         float scaledWidth = groundTexture.Width * groundScale;
@@ -173,31 +212,72 @@ public class Game1 : Game
         //Hintergrund
         backgroundTexture = Content.Load<Texture2D>("background1");
 
-        //start in run animation
-        currentAnimation = runAnimation;
+        //UI Buttons
+        buttonBackground = new Texture2D(GraphicsDevice, 1, 1);
+        buttonBackground.SetData(new[] { Color.White });
+
+        shopButton = new UIButton(new Rectangle(20, 60, 120, 40), "Shop", buttonfont, buttonBackground);
+        inventoryButton = new UIButton(new Rectangle(20, 110, 120, 40), "Inventory", buttonfont, buttonBackground);
+
+        //Inventory
+        inventoryBackground = Content.Load<Texture2D>("Inventory/inventory");
+
+        helmetSlot = Content.Load<Texture2D>("Inventory/helmet_slot");
+        chestSlot = Content.Load<Texture2D>("Inventory/chest_slot");
+        pantSlot = Content.Load<Texture2D>("Inventory/pant_slot");
+        bootSlot = Content.Load<Texture2D>("Inventory/boot_slot");
+        ringSlot = Content.Load<Texture2D>("Inventory/ring_slot");
+        amuletSlot = Content.Load<Texture2D>("Inventory/amulet_slot");
+        weaponSlot = Content.Load<Texture2D>("Inventory/weapon_slot");
+        glovesSlot = Content.Load<Texture2D>("Inventory/gloves_slot");
+
+
+        float inventoryX = (screenWidth - inventoryBackground.Width) / 2f;
+        float inventoryY = (screenHeight - inventoryBackground.Height) / 2f;
+        inventoryPosition = new Vector2(inventoryX, inventoryY);
+
+        float slotWidth = helmetSlot.Width;
+        float slotHeight = helmetSlot.Height;
+        float slotScale = 1f; // Falls du skalierst
+        float offsetX = (slotWidth * slotScale) * 0.5f; // halber Slot-Abstand
+
+        Vector2 leftSlotStart = inventoryPosition - new Vector2(offsetX + slotWidth, 0); // links vom Inventar
+        Vector2 topOffset = new Vector2(0, 0); // Offset falls nötig
+
+        helmetPos = leftSlotStart + topOffset;
+        chestPos  = helmetPos + new Vector2(0, 1) * (slotHeight + 10); // vertikaler Abstand 10px z.B.
+        glovesPos = chestPos + new Vector2(0, 1) * (slotHeight + 10);
+        pantsPos  = glovesPos  + new Vector2(0, 1) * (slotHeight + 10);
+        bootsPos  = pantsPos  + new Vector2(0, 1) * (slotHeight + 10);
+
+        float leftOffset = slotWidth + offsetX;
+        ringPos   = chestPos  - new Vector2(leftOffset, 0);
+        amuletPos = glovesPos  - new Vector2(leftOffset, 0);
+        weaponPos = pantsPos - new Vector2(leftOffset, 0);
+
+        //Items
+        armorItemTextures = SpriteLoader.LoadArmorItems(Content, "Armor");
+        // Collect all tier 0 armor keys
+        foreach (var key in armorItemTextures.Keys)
+        {
+            if (key.StartsWith("armor_0_"))
+                tier0ArmorKeys.Add(key);
+        }
+
+        //Enemies
 
         //Orc-Idle
-        for (int i = 0; i <= 5; i++)
-        {
-            string name = $"Sprites/Orc_Sprites/orc_0_{i}";
-            orcFrames.Add(Content.Load<Texture2D>(name));
-        }
         orcFrames = SpriteLoader.LoadEnemyFrames(Content, "Sprites/Orc_Sprites/orc_0_", 0, 5);
         orcIdleAnimation = new Animation(orcFrames, 0.15f);
-
         //Orc-Death
-        List<Texture2D> orcDeathFrames = new();
-        for (int i = 0; i <= 3; i++)
-        {
-            string name = $"Sprites/Orc_Sprites/orc_5_{i}";
-            orcDeathFrames.Add(Content.Load<Texture2D>(name));
-        }
-        orcDeathAnimation = new Animation(orcDeathFrames, 0.1f)
+        orcFrames = SpriteLoader.LoadEnemyFrames(Content, "Sprites/Orc_Sprites/orc_5_", 0, 3);
+        orcDeathAnimation = new Animation(orcFrames, 0.1f)
         {
             Loop = false
         };
 
-
+        //start player in run animation
+        currentAnimation = runAnimation;
 
 
     }
@@ -213,6 +293,7 @@ public class Game1 : Game
             playerVelocity.Y = jumpForce;
             isJumping = true;
         }
+
 
         //Generate Coins
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -234,7 +315,7 @@ public class Game1 : Game
             float maxY = groundY - (90 * scale + playerJumpHeight * 0.7f);
             float baseY = (float)(maxY + rng.NextDouble() * 100); // z. B. 30 px Varianz
 
-            bool spawnEnemy = rng.NextDouble() < 0.25;//25% chance for enemy instead of coins
+            bool spawnEnemy = rng.NextDouble() < 1;//25% chance for enemy instead of coins
             if (spawnEnemy)
             {
                 //Spawn Orc
@@ -274,9 +355,7 @@ public class Game1 : Game
         }
 
 
-        //Coin-Player Collision
-        int frameWidth = playerFrames[0].Width;
-        int frameHeight = playerFrames[0].Height;
+        //Entity-Player Collision
         for (int i = coinPositions.Count - 1; i >= 0; i--)
         {
             Rectangle coinRect = new Rectangle((int)coinPositions[i].X, (int)coinPositions[i].Y, (int)(coinTexture.Width * coinScale) , (int)(coinTexture.Height * coinScale));
@@ -294,6 +373,16 @@ public class Game1 : Game
             {
                 enemy.IsAlive = false;
                 Gold += goldPerEnemy;
+                
+                //Item Drops
+                if (rng.NextDouble() < armorDropChance && tier0ArmorKeys.Count > 0)
+                {
+                    string randomKey = tier0ArmorKeys[rng.Next(tier0ArmorKeys.Count)];
+                    Texture2D dropTexture = armorItemTextures[randomKey];
+                    Vector2 dropPosition = enemy.Position + new Vector2(10, -20); // slightly above enemy
+
+                    inventoryItems.Add(new InventoryItem { Icon = dropTexture, Id = randomKey });
+                }
             }
         }
 
@@ -310,11 +399,9 @@ public class Game1 : Game
         }
 
 
-
         //Track if enemy nearby
         bool nearEnemy = false;
 
-        
         foreach (var enemy in enemies)
         {
             if (!enemy.IsAlive) continue;
@@ -393,6 +480,17 @@ public class Game1 : Game
             if (enemies[i].ReadyToBeRemoved(dt))
                 enemies.RemoveAt(i);
         }
+
+        //Button Updates
+        shopButton.Update();
+        inventoryButton.Update();
+
+        if (shopButton.WasClicked)
+            showShop = !showShop;
+
+        if (inventoryButton.WasClicked)
+            showInventory = !showInventory;
+
 
 
 
@@ -489,6 +587,67 @@ public class Game1 : Game
         }
         Rectangle playerHitbox = GetPlayerHitbox();
         spriteBatch.Draw(whitePixel, playerHitbox, Color.Red * 0.4f); // halbtransparentes Rot
+
+        shopButton.Draw(spriteBatch);
+        inventoryButton.Draw(spriteBatch);
+
+        if (showShop)
+        {
+            // draw shop panel
+            spriteBatch.Draw(whitePixel, new Rectangle(200, 100, 400, 300), Color.White * 0.9f);
+            spriteBatch.DrawString(scorefont, "Shop: Buy upgrades here", new Vector2(220, 120), Color.Black);
+        }
+
+        if (showInventory)
+        {
+            // draw inventory panel
+            // Zielgröße anhand der Slotgröße und Slotanzahl (z.B. 8 Spalten × 4 Zeilen)
+            int slotsWide = 8;
+            int slotsHigh = 4;
+            int slotSize = helmetSlot.Width; // oder Height, wenn quadratisch
+
+            Vector2 inventorySize = new Vector2(slotsWide * slotSize, slotsHigh * slotSize);
+            spriteBatch.Draw(inventoryBackground,
+                destinationRectangle: new Rectangle((int)inventoryPosition.X, (int)inventoryPosition.Y, (int)inventorySize.X, (int)inventorySize.Y),
+                color: Color.White
+            );
+            spriteBatch.Draw(inventoryBackground, new Vector2((int)inventoryPosition.X, (int)inventoryPosition.Y), Color.White);
+            
+
+
+            spriteBatch.Draw(helmetSlot, helmetPos, Color.White);
+            spriteBatch.Draw(chestSlot, chestPos, Color.White);
+            spriteBatch.Draw(glovesSlot, glovesPos, Color.White);
+            spriteBatch.Draw(pantSlot, pantsPos, Color.White);
+            spriteBatch.Draw(bootSlot, bootsPos, Color.White);
+            spriteBatch.Draw(weaponSlot, weaponPos, Color.White);
+            spriteBatch.Draw(ringSlot, ringPos, Color.White);
+            spriteBatch.Draw(amuletSlot, amuletPos, Color.White);
+
+            //Draw items in inventory
+            int columns = 10;
+            int itemsize = (int)((float)slotSize * 2/3);
+            int rows = 5;
+            int slotWidth= 75;
+            int slotHeight= 71;
+            int spacingX = 22;
+            int spacingY = 24;
+            int marginX = 28;
+            int marginY = 22;
+            Vector2 start = inventoryPosition + new Vector2(marginX, marginY);
+
+            for (int i = 0; i < inventoryItems.Count && i < columns * rows; i++)
+            {
+                int col = i % columns;
+                int row = i / columns;
+
+                float x = start.X + col * (slotWidth + spacingX) ;
+                float y = start.Y + row * (slotHeight + spacingY) ;
+                Rectangle targetRect = new Rectangle((int)x, (int)y, slotWidth, slotHeight);
+                spriteBatch.Draw(inventoryItems[i].Icon, targetRect, Color.White);
+            }
+        }
+
 
 
         // Spieler
