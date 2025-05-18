@@ -145,6 +145,54 @@
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0022.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0023.png</File>
     <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Sprites/Run/sword_run_0024.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_0_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_1_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_2_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_3_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_4_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_5_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_6_5.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_0.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_1.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_2.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_3.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_4.png</File>
+    <File>C:/Users/Licht/Documents/Programming/IdleGame/Content/Weapons/item_7_5.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -288,5 +336,53 @@
     <File>Sprites/Run/sword_run_0022</File>
     <File>Sprites/Run/sword_run_0023</File>
     <File>Sprites/Run/sword_run_0024</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

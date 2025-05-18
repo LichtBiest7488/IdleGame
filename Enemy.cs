@@ -49,9 +49,6 @@ public class Enemy
         );
     }
 
-
-
-
     public void Update(GameTime gameTime)
     {
         // Animation nicht bei jedem Frame neu zuweisen

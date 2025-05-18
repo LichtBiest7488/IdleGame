@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq.Expressions;
 using idleGame;
+using MonoGame.Framework.Devices.Sensors;
 
 
 namespace idleGame;
@@ -24,9 +25,11 @@ public class Game1 : Game
     int Gold;
     int goldPerCoin;
     int goldPerEnemy;
+    int Level;
 
     float screenHeight;
     float screenWidth;
+
 
 
 
@@ -37,7 +40,7 @@ public class Game1 : Game
     float spawnTimer = 0f;
     float spawnInterval = 10.0f;
     float coinScale;
-
+    float enemySpawnChance = 1f; //25%
 
 
     // Player
@@ -64,7 +67,7 @@ public class Game1 : Game
     //Boden
     Texture2D groundTexture;
     List<Vector2> groundPositions = new();
-    float ScrollSpeed = 2f;
+    float ScrollSpeed = 4f;
     float groundScale;
     float groundY;
     Texture2D grassTexture;
@@ -102,13 +105,44 @@ public class Game1 : Game
     Vector2 ringPos, amuletPos, weaponPos;
 
     Vector2 basePosition = new Vector2(100, 100); // top-left corner
+    // ganz oben in Game1 (bei den anderen Feldern)
+    const int InventoryColumns = 10;
+    const int InventoryRows = 5;
+    const int SlotWidth = 75;
+    const int SlotHeight = 71;
+    const int SlotSpacingX = 22;
+    const int SlotSpacingY = 24;
+    const int InventoryMarginX = 28;
+    const int InventoryMarginY = 22;
+
 
 
     //Items 
+    private ItemDropManager itemDropManager;
+    Dictionary<int, List<string>> itemPools;
     Dictionary<string, Texture2D> armorItemTextures;
-    float armorDropChance = 1f; // 50% chance (adjust as needed)
-    List<string> tier0ArmorKeys = new();
+    Dictionary<string, Texture2D> weaponItemTextures;
+    float itemDropChance = 1f; // 50% chance
+    List<string> tier0ItemKeys = new();
     List<InventoryItem> inventoryItems = new();
+    InventoryItem draggedItem = null;
+    Point? hoveredSlot = null;
+    Vector2 dragOffset = Vector2.Zero;
+    InventoryItem equippedHelmet, equippedChest, equippedPants, equippedBoots;
+    InventoryItem equippedGloves, equippedRing, equippedAmulet, equippedWeapon;
+    private enum DragOrigin
+    {
+        Inventory,
+        Equipment
+    }
+
+    private DragOrigin? dragOrigin = null;
+    private Point? dragOldInventorySlot = null;
+    private ItemType? dragOldEquipSlotType = null;
+    private InventoryItem hoveredItem = null;
+
+
+
 
 
 
@@ -141,15 +175,8 @@ public class Game1 : Game
         Gold = 0;
         goldPerCoin = 1;
         goldPerEnemy = 5;
-
-
-        //Inventory 
-        
-
-
-
-
-        
+        Level = 1;
+       
         base.Initialize();
     }
 
@@ -261,8 +288,23 @@ public class Game1 : Game
         foreach (var key in armorItemTextures.Keys)
         {
             if (key.StartsWith("armor_0_"))
-                tier0ArmorKeys.Add(key);
+                tier0ItemKeys.Add(key);
         }
+        // Collect all tier 0 weapon keys
+        weaponItemTextures = SpriteLoader.LoadWeaponItems(Content, "Weapons");
+        Console.WriteLine("Geladene Waffen:");
+        foreach (var key in weaponItemTextures.Keys)
+            Console.WriteLine(" → " + key);
+
+        foreach (var key in weaponItemTextures.Keys)
+        {
+            if (key.StartsWith("item_0_"))
+                tier0ItemKeys.Add(key);
+        }
+
+        Console.WriteLine("Dropbare Items:");
+        foreach (var key in tier0ItemKeys)
+            Console.WriteLine($"→ {key}");
 
         //Enemies
 
@@ -275,6 +317,48 @@ public class Game1 : Game
         {
             Loop = false
         };
+
+
+
+        itemPools = new Dictionary<int, List<string>>()
+        {
+            { 0, new List<string>() },
+            { 1, new List<string>() },
+            { 2, new List<string>() },
+            { 3, new List<string>() },
+            { 4, new List<string>() },
+            { 5, new List<string>() },
+            { 6, new List<string>() },
+            { 7, new List<string>() },
+        };
+
+        foreach (var key in armorItemTextures.Keys)
+        {
+            if (key.StartsWith("armor_0_")) itemPools[0].Add(key);
+            if (key.StartsWith("armor_1_")) itemPools[1].Add(key);
+            if (key.StartsWith("armor_2_")) itemPools[2].Add(key);
+            if (key.StartsWith("armor_3_")) itemPools[3].Add(key);
+            if (key.StartsWith("armor_4_")) itemPools[4].Add(key);
+            if (key.StartsWith("armor_5_")) itemPools[5].Add(key);
+            if (key.StartsWith("armor_6_")) itemPools[6].Add(key);
+            if (key.StartsWith("armor_7_")) itemPools[7].Add(key);
+        }
+        foreach (var key in weaponItemTextures.Keys)
+        {
+            if (key.StartsWith("item_0_")) itemPools[0].Add(key);
+            if (key.StartsWith("item_1_")) itemPools[1].Add(key);
+            if (key.StartsWith("item_2_")) itemPools[2].Add(key);
+            if (key.StartsWith("item_3_")) itemPools[3].Add(key);
+            if (key.StartsWith("item_4_")) itemPools[4].Add(key);
+            if (key.StartsWith("item_5_")) itemPools[5].Add(key);
+            if (key.StartsWith("item_6_")) itemPools[6].Add(key);
+            if (key.StartsWith("item_7_")) itemPools[7].Add(key);
+        }
+
+
+
+        //itemDropManager
+        itemDropManager = new ItemDropManager(itemDropChance, armorItemTextures, weaponItemTextures);
 
         //start player in run animation
         currentAnimation = runAnimation;
@@ -315,7 +399,7 @@ public class Game1 : Game
             float maxY = groundY - (90 * scale + playerJumpHeight * 0.7f);
             float baseY = (float)(maxY + rng.NextDouble() * 100); // z. B. 30 px Varianz
 
-            bool spawnEnemy = rng.NextDouble() < 1;//25% chance for enemy instead of coins
+            bool spawnEnemy = rng.NextDouble() < enemySpawnChance;//25% chance for enemy instead of coins
             if (spawnEnemy)
             {
                 //Spawn Orc
@@ -373,15 +457,20 @@ public class Game1 : Game
             {
                 enemy.IsAlive = false;
                 Gold += goldPerEnemy;
-                
-                //Item Drops
-                if (rng.NextDouble() < armorDropChance && tier0ArmorKeys.Count > 0)
-                {
-                    string randomKey = tier0ArmorKeys[rng.Next(tier0ArmorKeys.Count)];
-                    Texture2D dropTexture = armorItemTextures[randomKey];
-                    Vector2 dropPosition = enemy.Position + new Vector2(10, -20); // slightly above enemy
 
-                    inventoryItems.Add(new InventoryItem { Icon = dropTexture, Id = randomKey });
+                var item = itemDropManager.TryDrop(Level);
+                if (item != null)
+                {
+                    Point? freeSlot = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                    if (freeSlot.HasValue)
+                    {
+                        item.SlotPosition = freeSlot.Value;
+                        inventoryItems.Add(item);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inventar voll!");
+                    }
                 }
             }
         }
@@ -491,6 +580,292 @@ public class Game1 : Game
         if (inventoryButton.WasClicked)
             showInventory = !showInventory;
 
+        
+
+        //Inventar Items bewegen
+        if (showInventory)
+        {
+            MouseState mouse = Mouse.GetState();
+            Vector2 mousePos = new Vector2(mouse.X, mouse.Y);
+
+            //Item Hover
+            hoveredSlot = GetInventorySlotAtPosition(mousePos, inventoryPosition + new Vector2(InventoryMarginX, InventoryMarginY), InventoryColumns, InventoryRows, SlotWidth, SlotHeight, SlotSpacingX, SlotSpacingY);
+            var equipHover = GetHoveredEquipSlot(mousePos);
+            hoveredItem = null;
+            if (hoveredSlot != null)
+            {
+                hoveredItem = inventoryItems.Find(it => it.SlotPosition == hoveredSlot.Value);
+            }
+            else if (equipHover != null)
+            {
+                switch (equipHover.Value.type)
+                {
+                    case ItemType.Helmet: hoveredItem = equippedHelmet; break;
+                    case ItemType.Chest: hoveredItem = equippedChest; break;
+                    case ItemType.Pants: hoveredItem = equippedPants; break;
+                    case ItemType.Boots: hoveredItem = equippedBoots; break;
+                    case ItemType.Gloves: hoveredItem = equippedGloves; break;
+                    case ItemType.Weapon: hoveredItem = equippedWeapon; break;
+                    case ItemType.Ring: hoveredItem = equippedRing; break;
+                    case ItemType.Amulet: hoveredItem = equippedAmulet; break;
+                }
+            }
+
+            if (mouse.LeftButton == ButtonState.Pressed && draggedItem == null)
+                {
+                    // Inventar item aufnehmen
+                    foreach (var item in inventoryItems)
+                    {
+                        if (item.SlotPosition == hoveredSlot)
+                        {
+                            draggedItem = item;
+                            dragOffset = mousePos - (inventoryPosition + new Vector2(InventoryMarginX + hoveredSlot.Value.X * (SlotWidth + SlotSpacingX),
+                                                                                     InventoryMarginY + hoveredSlot.Value.Y * (SlotHeight + SlotSpacingY)));
+                            dragOrigin = DragOrigin.Inventory;
+                            dragOldInventorySlot = item.SlotPosition;
+                            return;
+                        }
+                    }
+                    //Equip Slot item aufnehmen
+                    if (equipHover != null)
+                    {
+                        switch (equipHover.Value.type)
+                        {
+                            case ItemType.Helmet:
+                                if (equippedHelmet != null)
+                                {
+                                    draggedItem = equippedHelmet;
+                                    equippedHelmet = null;
+                                    dragOldEquipSlotType = ItemType.Helmet;
+                                }
+                                break;
+                            case ItemType.Chest: if (equippedChest != null) { draggedItem = equippedChest; equippedChest = null; dragOldEquipSlotType = ItemType.Chest; } break;
+                            case ItemType.Pants: if (equippedPants != null) { draggedItem = equippedPants; equippedPants = null; dragOldEquipSlotType = ItemType.Pants; } break;
+                            case ItemType.Boots: if (equippedBoots != null) { draggedItem = equippedBoots; equippedBoots = null; dragOldEquipSlotType = ItemType.Boots; } break;
+                            case ItemType.Gloves: if (equippedGloves != null) { draggedItem = equippedGloves; equippedGloves = null; dragOldEquipSlotType = ItemType.Gloves; } break;
+                            case ItemType.Weapon: if (equippedWeapon != null) { draggedItem = equippedWeapon; equippedWeapon = null; dragOldEquipSlotType = ItemType.Weapon; } break;
+                            case ItemType.Ring: if (equippedRing != null) { draggedItem = equippedRing; equippedRing = null; dragOldEquipSlotType = ItemType.Ring; } break;
+                            case ItemType.Amulet: if (equippedAmulet != null) { draggedItem = equippedAmulet; equippedAmulet = null; dragOldEquipSlotType = ItemType.Amulet; } break;
+                        }
+
+                        dragOffset = new Vector2(SlotWidth / 2, SlotHeight / 2); // optisch zentriert greifen
+                        dragOrigin = DragOrigin.Equipment;
+                    }
+                }
+                //aufgehobenes item loslassen
+                else if (mouse.LeftButton == ButtonState.Released && draggedItem != null)
+                {
+                    var equipTarget = GetHoveredEquipSlot(mousePos);
+                    if (equipTarget != null && equipTarget.Value.type == draggedItem.Type)
+                    {
+                        // Ausrüsten
+                        switch (draggedItem.Type)
+                        {
+                            case ItemType.Helmet:
+                                if (equippedHelmet != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedHelmet.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedHelmet);
+                                    }
+                                }
+                                equippedHelmet = draggedItem;
+                                break;
+                            case ItemType.Chest:
+                                if (equippedChest != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedChest.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedChest);
+                                    }
+                                }
+                                equippedChest = draggedItem;
+                                break;
+                            case ItemType.Pants:
+                                if (equippedPants != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedPants.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedPants);
+                                    }
+                                }
+                                equippedPants = draggedItem;
+                                break;
+                            case ItemType.Boots:
+                                if (equippedBoots != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedBoots.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedBoots);
+                                    }
+                                }
+                                equippedBoots = draggedItem;
+                                break;
+                            case ItemType.Gloves:
+                                if (equippedGloves != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedGloves.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedGloves);
+                                    }
+                                }
+                                equippedGloves = draggedItem;
+                                break;
+                            case ItemType.Ring:
+                                if (equippedRing != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedRing.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedRing);
+                                    }
+                                }
+                                equippedRing = draggedItem;
+                                break;
+                            case ItemType.Amulet:
+                                if (equippedAmulet != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedAmulet.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedAmulet);
+                                    }
+                                }
+                                equippedAmulet = draggedItem;
+                                break;
+                            case ItemType.Weapon:
+                                if (equippedWeapon != null)
+                                {
+                                    Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                                    if (free.HasValue)
+                                    {
+                                        equippedWeapon.SlotPosition = free.Value;
+                                        inventoryItems.Add(equippedWeapon);
+                                    }
+                                }
+                                equippedWeapon = draggedItem;
+                                break;
+                        }
+
+                        inventoryItems.Remove(draggedItem);
+                    }
+                    else if (hoveredSlot != null && !inventoryItems.Exists(it => it.SlotPosition == hoveredSlot.Value))
+                    {
+                        // Normales Verschieben im Raster
+                        draggedItem.SlotPosition = hoveredSlot.Value;
+                        if (!inventoryItems.Contains(draggedItem))
+                            inventoryItems.Add(draggedItem);
+
+                    }
+                    else if (hoveredSlot != null && inventoryItems.Exists(it => it.SlotPosition == hoveredSlot.Value))
+                    {
+                        var targetItem = inventoryItems.Find(it => it.SlotPosition == hoveredSlot.Value);
+                        // Swap logic
+                        if (dragOrigin == DragOrigin.Inventory)
+                        {
+                            // Beide Items tauschen die Plätze
+                            Point temp = draggedItem.SlotPosition;
+                            draggedItem.SlotPosition = targetItem.SlotPosition;
+                            targetItem.SlotPosition = temp;
+                        }
+                        else if (dragOrigin == DragOrigin.Equipment)
+                        {
+                            // Nur tauschen, wenn Typ gleich
+                            if (draggedItem.Type == targetItem.Type)
+                            {
+                                // Ziel wird ins Equip gelegt
+                                switch (draggedItem.Type)
+                                {
+                                    case ItemType.Helmet: equippedHelmet = targetItem; break;
+                                    case ItemType.Chest: equippedChest = targetItem; break;
+                                    case ItemType.Pants: equippedPants = targetItem; break;
+                                    case ItemType.Boots: equippedBoots = targetItem; break;
+                                    case ItemType.Gloves: equippedGloves = targetItem; break;
+                                    case ItemType.Weapon: equippedWeapon = targetItem; break;
+                                    case ItemType.Ring: equippedRing = targetItem; break;
+                                    case ItemType.Amulet: equippedAmulet = targetItem; break;
+                                }
+                                // DraggedItem wird auf Inventory-Slot gesetzt
+                                draggedItem.SlotPosition = hoveredSlot.Value;
+                                // Replace draggedItem with target
+                                inventoryItems.Remove(targetItem);
+                                inventoryItems.Add(draggedItem);
+                            }
+                            else
+                            {
+                                // Kein Tausch möglich, Item zurück ins Equipment
+                                switch (draggedItem.Type)
+                                {
+                                    case ItemType.Helmet: equippedHelmet = draggedItem; break;
+                                    case ItemType.Chest: equippedChest = draggedItem; break;
+                                    case ItemType.Pants: equippedPants = draggedItem; break;
+                                    case ItemType.Boots: equippedBoots = draggedItem; break;
+                                    case ItemType.Gloves: equippedGloves = draggedItem; break;
+                                    case ItemType.Weapon: equippedWeapon = draggedItem; break;
+                                    case ItemType.Ring: equippedRing = draggedItem; break;
+                                    case ItemType.Amulet: equippedAmulet = draggedItem; break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Point? free = FindFirstFreeInventorySlot(InventoryColumns, InventoryRows);
+                        if (free.HasValue)
+                        {
+                            draggedItem.SlotPosition = free.Value;
+                            if (!inventoryItems.Contains(draggedItem))
+                                inventoryItems.Add(draggedItem);
+                        }
+                        else
+                        {
+                            if (dragOrigin == DragOrigin.Inventory && dragOldInventorySlot.HasValue)
+                            {
+                                // zurück an alte Inventarstelle
+                                draggedItem.SlotPosition = dragOldInventorySlot.Value;
+                                if (!inventoryItems.Contains(draggedItem))
+                                    inventoryItems.Add(draggedItem);
+                            }
+                            else if (dragOrigin == DragOrigin.Equipment && dragOldEquipSlotType.HasValue)
+                            {
+                                // zurück in Equip-Slot
+                                switch (dragOldEquipSlotType.Value)
+                                {
+                                    case ItemType.Helmet: equippedHelmet = draggedItem; break;
+                                    case ItemType.Chest: equippedChest = draggedItem; break;
+                                    case ItemType.Pants: equippedPants = draggedItem; break;
+                                    case ItemType.Boots: equippedBoots = draggedItem; break;
+                                    case ItemType.Gloves: equippedGloves = draggedItem; break;
+                                    case ItemType.Weapon: equippedWeapon = draggedItem; break;
+                                    case ItemType.Ring: equippedRing = draggedItem; break;
+                                    case ItemType.Amulet: equippedAmulet = draggedItem; break;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Kein gültiger Zielort, Item verloren!");
+                            }
+                        }
+                    }
+
+                    draggedItem = null;
+                    dragOrigin = null;
+                }
+
+
+        }
 
 
 
@@ -506,6 +881,61 @@ public class Game1 : Game
             (int)(180 * scale)                      // Höhe
         );
     }
+    private Point? GetInventorySlotAtPosition(Vector2 mousePos, Vector2 inventoryStart, int columns, int rows, int slotW, int slotH, int spacingX, int spacingY)
+    {
+        for (int col = 0; col < columns; col++)
+        {
+            for (int row = 0; row < rows; row++)
+            {
+                float x = inventoryStart.X + col * (slotW + spacingX);
+                float y = inventoryStart.Y + row * (slotH + spacingY);
+                Rectangle rect = new Rectangle((int)x, (int)y, slotW, slotH);
+
+                if (rect.Contains(mousePos))
+                    return new Point(col, row);
+            }
+        }
+        return null;
+    }
+
+    private Point? FindFirstFreeInventorySlot(int columns, int rows)
+    {
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < columns; col++)
+            {
+                Point slot = new Point(col, row);
+                if (!inventoryItems.Exists(item => item.SlotPosition == slot))
+                    return slot;
+            }
+        }
+        return null; // kein freier Slot mehr
+    }
+
+    private (ItemType type, Vector2 pos)? GetHoveredEquipSlot(Vector2 mousePos)
+    {
+        Dictionary<ItemType, Vector2> equipSlots = new()
+        {
+            { ItemType.Helmet, helmetPos },
+            { ItemType.Chest, chestPos },
+            { ItemType.Pants, pantsPos },
+            { ItemType.Boots, bootsPos },
+            { ItemType.Gloves, glovesPos },
+            { ItemType.Weapon, weaponPos },
+            { ItemType.Ring, ringPos },
+            { ItemType.Amulet, amuletPos }
+        };
+
+        foreach (var pair in equipSlots)
+        {
+            Rectangle rect = new Rectangle((int)pair.Value.X, (int)pair.Value.Y, SlotWidth, SlotHeight);
+            if (rect.Contains(mousePos))
+                return (pair.Key, pair.Value);
+        }
+
+        return null;
+    }
+
 
 
     protected override void Draw(GameTime gameTime)
@@ -583,10 +1013,11 @@ public class Game1 : Game
 
             // Optional: nur anzeigen, wenn Debug-Modus aktiv
             Rectangle hitbox = enemy.GetHitbox(); // Diese Methode musst du selbst hinzufügen!
-            spriteBatch.Draw(whitePixel, hitbox, Color.Red * 0.4f);
+            //spriteBatch.Draw(whitePixel, hitbox, Color.Red * 0.4f);
         }
+        //Debug player hitbox
         Rectangle playerHitbox = GetPlayerHitbox();
-        spriteBatch.Draw(whitePixel, playerHitbox, Color.Red * 0.4f); // halbtransparentes Rot
+        //spriteBatch.Draw(whitePixel, playerHitbox, Color.Red * 0.4f); // halbtransparentes Rot
 
         shopButton.Draw(spriteBatch);
         inventoryButton.Draw(spriteBatch);
@@ -612,7 +1043,7 @@ public class Game1 : Game
                 color: Color.White
             );
             spriteBatch.Draw(inventoryBackground, new Vector2((int)inventoryPosition.X, (int)inventoryPosition.Y), Color.White);
-            
+
 
 
             spriteBatch.Draw(helmetSlot, helmetPos, Color.White);
@@ -625,30 +1056,63 @@ public class Game1 : Game
             spriteBatch.Draw(amuletSlot, amuletPos, Color.White);
 
             //Draw items in inventory
-            int columns = 10;
-            int itemsize = (int)((float)slotSize * 2/3);
-            int rows = 5;
-            int slotWidth= 75;
-            int slotHeight= 71;
-            int spacingX = 22;
-            int spacingY = 24;
-            int marginX = 28;
-            int marginY = 22;
-            Vector2 start = inventoryPosition + new Vector2(marginX, marginY);
 
-            for (int i = 0; i < inventoryItems.Count && i < columns * rows; i++)
+            int itemsize = (int)((float)slotSize * 2 / 3);
+            Vector2 start = inventoryPosition + new Vector2(InventoryMarginX, InventoryMarginY);
+
+            foreach (var item in inventoryItems)
             {
-                int col = i % columns;
-                int row = i / columns;
+                if (item == draggedItem)
+                    continue;
 
-                float x = start.X + col * (slotWidth + spacingX) ;
-                float y = start.Y + row * (slotHeight + spacingY) ;
-                Rectangle targetRect = new Rectangle((int)x, (int)y, slotWidth, slotHeight);
-                spriteBatch.Draw(inventoryItems[i].Icon, targetRect, Color.White);
+                int col = item.SlotPosition.X;
+                int row = item.SlotPosition.Y;
+
+                float x = start.X + col * (SlotWidth + SlotSpacingX);
+                float y = start.Y + row * (SlotHeight + SlotSpacingY);
+
+                Rectangle targetRect = new Rectangle((int)x, (int)y, SlotWidth, SlotHeight);
+                spriteBatch.Draw(item.Icon, targetRect, Color.White);
             }
+
+            //Draw equipped items
+            if (equippedHelmet != null)
+                spriteBatch.Draw(equippedHelmet.Icon, new Rectangle((int)helmetPos.X, (int)helmetPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedChest != null)
+                spriteBatch.Draw(equippedChest.Icon, new Rectangle((int)chestPos.X, (int)chestPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedPants != null)
+                spriteBatch.Draw(equippedPants.Icon, new Rectangle((int)pantsPos.X, (int)pantsPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedBoots != null)
+                spriteBatch.Draw(equippedBoots.Icon, new Rectangle((int)bootsPos.X, (int)bootsPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedGloves != null)
+                spriteBatch.Draw(equippedGloves.Icon, new Rectangle((int)glovesPos.X, (int)glovesPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedRing != null)
+                spriteBatch.Draw(equippedRing.Icon, new Rectangle((int)ringPos.X, (int)ringPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedAmulet != null)
+                spriteBatch.Draw(equippedAmulet.Icon, new Rectangle((int)amuletPos.X, (int)amuletPos.Y, SlotWidth, SlotHeight), Color.White);
+
+            if (equippedWeapon != null)
+                spriteBatch.Draw(equippedWeapon.Icon, new Rectangle((int)weaponPos.X, (int)weaponPos.Y, SlotWidth, SlotHeight), Color.White);
+
+
+
+            // Gezogenes Item ganz oben zeichnen
+            if (draggedItem != null)
+            {
+                MouseState mouse = Mouse.GetState();
+                Vector2 mousePos = new Vector2(mouse.X, mouse.Y);
+                Rectangle dragRect = new Rectangle((int)(mousePos.X - dragOffset.X), (int)(mousePos.Y - dragOffset.Y), SlotWidth, SlotHeight);
+                spriteBatch.Draw(draggedItem.Icon, dragRect, Color.White);
+            }
+
+
         }
-
-
 
         // Spieler
         if (playerFrames.Count > 0)
@@ -659,6 +1123,18 @@ public class Game1 : Game
         // Score
         spriteBatch.DrawString(scorefont, $"Gold: {Gold}", new Vector2(10, 10), Color.Black);
 
+        //Hovered Item
+        if (hoveredItem != null)
+        {
+            Vector2 mouse = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            string text = hoveredItem.Name ?? hoveredItem.Id;
+
+            Vector2 size = scorefont.MeasureString(text);
+            Rectangle bg = new Rectangle((int)mouse.X + 10, (int)mouse.Y + 10, (int)size.X + 10, (int)size.Y + 6);
+
+            spriteBatch.Draw(whitePixel, bg, Color.Black * 0.85f);
+            spriteBatch.DrawString(scorefont, text, new Vector2(bg.X + 5, bg.Y + 3), Color.White);
+        }
 
 
         spriteBatch.End();
